@@ -389,7 +389,7 @@ function animate() {
 
   console.log('allowRotate = ' + allowRotate);
   if (model && allowRotate) {
-    model.rotation.y += 0.002;
+    model.rotation.y += 0.005;
   }
   //console.log(camera.position)
 
