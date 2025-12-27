@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <title>Arush's</title>
+        <style>
+
+        .sour-gummy{
+            font-family: "Sour Gummy", sans-serif;
+            font-optical-sizing: auto;
+
+            font-variation-settings:
+                "wdth" 100;
+            }
+        body { margin: 0; }
+        .rotation-button > img{
+            /* background-image: url(./The_Globe_Media/Globe_Spin.png); */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: rgb(255, 255, 0);
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 5vh;
+            height: 5vh;
+            z-index: 50;
+            border-radius: 30%;
+            box-shadow: 0px 0px 10px black;
+        }
+
+        #canvas{
+            display: none;
+        }
+        .start-button-container{
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99;
+        }
+        .start-button{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 200px;
+            height: 200px;
+            z-index: 100;
+            background-color: rgb(0, 140, 255);
+            border-radius: 50%;
+        }
+        .arush-start-button-container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 200px;
+            height: 200px;
+            z-index: 101;
+            /* border: 1px solid white; */
+        }
+        .arush-start-button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border: 1px solid white; */
+        }
+        .pop-up-position{
+            display: none; 
+            position: absolute;
+            z-index: 50;
+            width: 100vw;
+            height: 100vh; 
+            margin: 0px;
+            padding: 0px;
+        }
+        .pop-up-container{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.171);
+        }
+        .pop-up{
+            display: flex;
+            flex-direction: column;
+            height: 50%;
+            width: 50%;
+            max-width: 500px;
+            gap: 2%;
+            background-color: rgba(0, 0, 0, 0.534);
+        }
+        .item{
+            border:2px solid yellow;
+            padding: 1px;
+        }
+        .heading{
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.534);
+            display: flex;
+            color: rgb(255, 238, 7);
+            justify-content: center;
+            font-size: xx-large;
+            font-weight: 700;
+        }
+        .image{
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+        }
+        .the-image{
+            height: 100%;
+            width: 50%;
+            object-fit: cover;
+
+        }
+        .content{
+            flex: 3;
+            background-color: rgba(0, 0, 0, 0.534);
+            overflow-y: auto;
+            color: aliceblue;
+            font-size: larger;
+            padding: 2%;
+            min-height: 30px;
+        }
+        .last{
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.534);
+            display: flex;
+            flex-direction: row;
+        }
+        .link{
+            width: 50%;
+            height: 100%;
+            
+            display: flex;
+            justify-content: center;
+
+        }
+        .the-link{
+            color: rgb(255, 238, 7);
+            font-size: large;
+        }
+        .exit{
+            width: 50%;
+            height: 100%;
+            /* border: 1px solid white; */
+            display: flex;
+            justify-content: center;
+        }
+        .exit-button{
+            width: 50%;
+            border-radius: 5%;
+            background-color: yellow;
+        }
+        b,a{
+            color: rgb(255, 238, 7);
+        }
+        .footer-container{
+            position: absolute;
+            bottom: 5px;
+            /* right: 0.5vw;
+            width: 99vw;
+            left: 0.5vw; */
+            width: 100vw;
+            height: 10vh;
+            z-index: 50;
+        }
+        .footer-position{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .footer{
+            width: 50%;
+            min-width: 300px;
+            height: 100%;
+            gap: 2%;
+            display: flex;
+            flex-direction: row;
+        }
+        .item_dash{
+            flex: 1;
+            aspect-ratio: 1 / 1;   /* square */
+            /* border: 1px solid white; */
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .item_dash img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            display: block;
+        }
+        .item_dash a{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items:center ;
+        }
+        .logo{
+            opacity: 0;
+            transform: scale(0);
+            
+        }
+        .loading-background{
+            position: absolute;
+            z-index: 102;
+            width: 99.9vw;
+            height: 99.9vh;
+            background-color: black;
+        }
+        .loading-container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 250px;
+            height: 250px;
+            z-index: 102;
+            border: 1px solid white;
+            border-radius: 50%;
+            
+        }
+        .sun{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .earth{
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%,-50%) rotate(0deg);
+            width: 220px;
+            height: 220px;
+            transition: transform 2s ease-in-out;
+            /* border: 1px solid white; */
+        }
+        .sun img{
+            width: 70px;
+            height: 70px;
+            top: 0px;
+            right: 0px;
+        }
+        .earth img{
+            width: 40px;
+            height: 40px;
+            /* border: 1px solid white; */
+        }
+        
+        </style>
+    </head>
+    <body class="sour-gummy">
+
+        <canvas id="canvas"></canvas>
+
+        <!--loading page design-->
+        <div class="loading-background">
+            <div class="loading-container">
+                <!--This will be the sun at the middle-->
+                <div class="sun"><img src="./The_Globe_Media/sun-loading-image.png" alt=""></div>
+                <!--This will be earth that will rotate around the sun. On full rotation the loading stops-->
+                <div class="earth"><img src="./The_Globe_Media/earth-loading-image.png" alt=""></div>
+            </div>
+        </div>
+            
+
+        <div class="start-button-container">
+            <div class="start-button"></div>
+        </div>
+        <div class="arush-start-button-container">
+            <div class="arush-start-button">
+                <img style="width: 200px; height: 200px;" src="./The_Globe_Media/ArushIcon.png" alt="">
+            </div>
+        </div>
+        <div class="rotation-button">
+         <img src="./The_Globe_Media/Globe_Spin.png" alt="">
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-position">
+                <div class="footer">
+                    <div class="item_dash">
+                        <a target="_blank" href="https://in.linkedin.com/in/arush-chinchkhede"><img class="linkedin logo" src="./The_Globe_Media/InBug-White.png" alt=""></a>
+                    </div>
+                    <div class="item_dash">
+                        <a target="_blank" href="https://youtube.com/@arush_chinchkhede"><img class="youtube logo" src="./The_Globe_Media/YouTube.png" style="transform: scale(1.2);"></a>
+                    </div>
+                    <div class="item_dash">
+                        <a target="_blank" href="https://github.com/arushraju"><img class="github logo" src="./The_Globe_Media/github-mark-white.svg" alt=""></a>
+                    </div>
+                    <div class="item_dash">
+                        <a target="_blank" href="mailto:arushc123@gmail.com"><img class="email logo" src="./The_Globe_Media/Email.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pop-up-position">
+            <div class="pop-up-container">
+                <div class="pop-up">
+                    <div class="heading item"></div>
+                    <div class="image item"><img class="the-image" src="" alt=""></div>
+                    <div class="content item"></div>
+                    <div class="last item">
+                        <div class="link"><a target="_blank" class="the-link" href="">Link</a></div>
+                        <div class="exit"><button class="exit-button">Exit</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js",
+                    "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/",
+                    "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js"
+                }
+            }
+        </script>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
